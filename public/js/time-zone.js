@@ -9,7 +9,7 @@
                 var searchResults = suggestions.map((suggestion) => {
                     return {
                         label: suggestion.abbreviation.toUpperCase() + ': ' + suggestion.name + ' ' + suggestion.comments,
-                        value: suggestion.abbreviation.toUpperCase()
+                        value: suggestion.abbreviation.toUpperCase() + ': ' + suggestion.name
                     }
                 });
 
