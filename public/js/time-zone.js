@@ -8,8 +8,8 @@
             }).done(function(suggestions){
                 var searchResults = suggestions.map((suggestion) => {
                     return {
-                        label: suggestion.abbreviation.toUpperCase() + ' ' + suggestion.name + ' ' + suggestion.comments,
-                        value: suggestion.abbreviation
+                        label: suggestion.abbreviation.toUpperCase() + ': ' + suggestion.name + ' ' + suggestion.comments,
+                        value: suggestion.abbreviation.toUpperCase()
                     }
                 });
 
