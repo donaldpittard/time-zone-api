@@ -7,8 +7,8 @@ use Slim\Http\Response;
 
 $app->get('/', function (Request $request, Response $response, array $args) {
     // Sample log message
-    $this->logger->info($args['Landed on index page']);
-    
+    $this->logger->info('Landed on index page');
+
 
     // Render index view
     return $this->renderer->render($response, 'index.phtml', $args);
@@ -62,7 +62,7 @@ $app->post('/api/timezones', function (Request $request, Response $response, arr
                 'country'      => $country,
                 'comments'     => $comments
             ];
-            
+
             $suggestions[] = $suggestion;
         }
     }
