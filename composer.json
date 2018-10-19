@@ -1,14 +1,14 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
-    "keywords": ["microframework", "rest", "router", "psr7"],
-    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "name": "donaldpittard/time-zone-api",
+    "description": "A time zone suggestion API",
+    "keywords": ["time zone", "rest"],
+    "homepage": "https://github.com/donaldpittard/time-zone-api",
     "license": "MIT",
     "authors": [
         {
-            "name": "Josh Lockhart",
-            "email": "info@joshlockhart.com",
-            "homepage": "http://www.joshlockhart.com/"
+            "name": "Donald Pittard",
+            "email": "donaldpittard@gmail.com",
+            "homepage": "http://www.donaldpittard.com/"
         }
     ],
     "require": {
