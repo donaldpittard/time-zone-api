@@ -14,58 +14,60 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     return $this->renderer->render($response, 'index.phtml', $args);
 });
 
-$app->post('/api/timezones', function (Request $request, Response $response, array $args) {
-    $regions     = [
-        'Africa'     => DateTimeZone::AFRICA,
-        'America'    => DateTimeZone::AMERICA,
-        'Antarctica' => DateTimeZone::ANTARCTICA,
-        'Arctic'     => DateTimeZone::ARCTIC,
-        'Asia'       => DateTimeZone::ASIA,
-        'Atlantic'   => DateTimeZone::ATLANTIC,
-        'Australia'  => DateTimeZone::AUSTRALIA,
-        'Europe'     => DateTimeZone::EUROPE,
-        'Indian'     => DateTimeZone::INDIAN,
-        'Pacific'    => DateTimeZone::PACIFIC
-    ];
-    $timeZones   = [];
-    $searchTerm  = $_POST['term'];
-    $suggestions = [];
+$app->post('/api/timezones', 'timeZone:suggest');
 
-    $this->logger->info('Hitting the time-zone endpoint');
-    $this->logger->info($searchTerm);
+// $app->post('/api/timezones', function (Request $request, Response $response, array $args) {
+//     $regions     = [
+//         'Africa'     => DateTimeZone::AFRICA,
+//         'America'    => DateTimeZone::AMERICA,
+//         'Antarctica' => DateTimeZone::ANTARCTICA,
+//         'Arctic'     => DateTimeZone::ARCTIC,
+//         'Asia'       => DateTimeZone::ASIA,
+//         'Atlantic'   => DateTimeZone::ATLANTIC,
+//         'Australia'  => DateTimeZone::AUSTRALIA,
+//         'Europe'     => DateTimeZone::EUROPE,
+//         'Indian'     => DateTimeZone::INDIAN,
+//         'Pacific'    => DateTimeZone::PACIFIC
+//     ];
+//     $timeZones   = [];
+//     $searchTerm  = $_POST['term'];
+//     $suggestions = [];
 
-    if (!$searchTerm) {
-        return $response->withJson([]);
-    }
+//     $this->logger->info('Hitting the time-zone endpoint');
+//     $this->logger->info($searchTerm);
 
-    foreach ($regions as $regionName => $regionId) {
-        $regionTimeZones = DateTimeZone::listIdentifiers($regionId);
-        $this->logger->info($regionId);
-        $timeZones = array_merge($timeZones, $regionTimeZones);
-    }
+//     if (!$searchTerm) {
+//         return $response->withJson([]);
+//     }
 
-    foreach ($timeZones as $id) {
-        $dateTimeZone = new DateTimeZone($id);
-        $dateTime     = new DateTime(null, $dateTimeZone);
-        $name         = preg_replace('/_/', ' ', $dateTimeZone->getName());
-        $location     = $dateTimeZone->getLocation();
-        $country      = $location['country_code'];
-        $comments     = $location['comments'];
-        $abbr         = $dateTime->format('T');
+//     foreach ($regions as $regionName => $regionId) {
+//         $regionTimeZones = DateTimeZone::listIdentifiers($regionId);
+//         $this->logger->info($regionId);
+//         $timeZones = array_merge($timeZones, $regionTimeZones);
+//     }
 
-        if (stripos($name, $searchTerm) > -1 ||
-            stripos($abbr, $searchTerm) > -1 ||
-            stripos($comments, $searchTerm) > -1) {
-            $suggestion = [
-                'name'         => $name,
-                'abbreviation' => $abbr,
-                'country'      => $country,
-                'comments'     => $comments
-            ];
+//     foreach ($timeZones as $id) {
+//         $dateTimeZone = new DateTimeZone($id);
+//         $dateTime     = new DateTime(null, $dateTimeZone);
+//         $name         = preg_replace('/_/', ' ', $dateTimeZone->getName());
+//         $location     = $dateTimeZone->getLocation();
+//         $country      = $location['country_code'];
+//         $comments     = $location['comments'];
+//         $abbr         = $dateTime->format('T');
 
-            $suggestions[] = $suggestion;
-        }
-    }
+//         if (stripos($name, $searchTerm) > -1 ||
+//             stripos($abbr, $searchTerm) > -1 ||
+//             stripos($comments, $searchTerm) > -1) {
+//             $suggestion = [
+//                 'name'         => $name,
+//                 'abbreviation' => $abbr,
+//                 'country'      => $country,
+//                 'comments'     => $comments
+//             ];
 
-    return $response->withJson($suggestions);
-});
+//             $suggestions[] = $suggestion;
+//         }
+//     }
+
+//     return $response->withJson($suggestions);
+// });
