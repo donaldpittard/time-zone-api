@@ -1,10 +1,10 @@
-(function(){      
+(function(){
     $('#time-zone').autocomplete({
         source: function(request, response) {
             var term = request.term;
 
             $.post('/api/timezones', {
-                'term': term
+                'searchTerm': term
             }).done(function(suggestions){
                 var searchResults = suggestions.map((suggestion) => {
                     return {
