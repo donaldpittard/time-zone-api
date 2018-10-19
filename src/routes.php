@@ -14,6 +14,10 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     return $this->renderer->render($response, 'index.phtml', $args);
 });
 
+$app->get('/info', function ($request, $response) {
+    echo phpinfo();
+});
+
 $app->post('/api/timezones', 'timeZone:suggest');
 
 // $app->post('/api/timezones', function (Request $request, Response $response, array $args) {
